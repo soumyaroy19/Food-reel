@@ -31,7 +31,7 @@ const FoodPartnerRegister = () => {
     }
 
     axios.post(
-      "http://localhost:3000/api/auth/food-partner/register",
+      "https://food-reel-backend-xii0.onrender.com/api/auth/food-partner/register",
       {
         name: businessName,
         contactName,
