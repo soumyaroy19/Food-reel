@@ -1,0 +1,406 @@
+/* ===================================================================
+   FOODIE ZONE CREATE FOOD STYLES: CLEAN MODERN BLUE
+   Clean dropzone, flavor tags, simple borders, and solid buttons
+   =================================================================== */
+
+@import './theme.css';
+
+.create-food-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4) var(--space-12);
+  background: var(--color-bg);
+  position: relative;
+}
+
+.create-food-card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: relative;
+  z-index: 2;
+  margin-top: var(--space-2);
+}
+
+/* Access Denied Card State */
+.access-denied-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-surface-alt);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-2);
+}
+
+.access-denied-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--color-danger);
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+}
+
+.access-denied-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.access-denied-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  max-width: 42ch;
+  line-height: 1.45;
+}
+
+.access-denied-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Header bar inside create food card */
+.create-food-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+}
+
+.back-btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.back-btn-pill:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.create-food-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.create-food-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create-food-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Form Layout */
+.create-food-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Inputs & Textareas */
+.field-group input[type="text"],
+.field-group textarea {
+  appearance: none;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+  width: 100%;
+}
+
+.field-group textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.45;
+}
+
+.field-group input[type="text"]:focus-visible,
+.field-group textarea:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Flavor tag selector pills */
+.flavor-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.flavor-tag-btn {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+.flavor-tag-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.flavor-tag-btn.is-active {
+  background: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* File Dropzone */
+.file-input-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.file-dropzone {
+  border: 1.5px dashed var(--color-border);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-4);
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  transition: border-color var(--transition-fast);
+}
+
+.file-dropzone:hover {
+  border-color: var(--color-primary);
+}
+
+.file-dropzone-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.file-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: grid;
+  place-items: center;
+}
+
+.file-dropzone-text {
+  color: var(--color-text);
+  font-size: 0.92rem;
+}
+
+.file-dropzone-text strong {
+  color: var(--color-primary);
+}
+
+.file-hint {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.error-text {
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* File chip */
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  margin-top: var(--space-2);
+}
+
+.file-chip-icon {
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+}
+
+.file-chip-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-chip-size {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+.file-chip-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-ghost.danger {
+  color: var(--color-danger);
+}
+
+.btn-ghost.danger:hover {
+  border-color: var(--color-danger);
+  background: var(--color-danger-subtle);
+}
+
+/* Video Preview Player */
+.video-preview {
+  width: 100%;
+  max-height: 340px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+
+.video-preview-el {
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 22px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background var(--transition-fast);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .create-food-card {
+    padding: var(--space-6) var(--space-4);
+  }
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}

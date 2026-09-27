@@ -1,0 +1,479 @@
+/* ===================================================================
+   FOODIE ZONE REELS: CLEAN MODERN BLUE
+   Clean video layout, simple controls, and smooth responsive snap scrolling
+   =================================================================== */
+
+@import './theme.css';
+
+.reels-page {
+  height: 100dvh;
+  width: 100vw;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+}
+
+/* Vertical feed with snap scrolling */
+.reels-feed {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Each reel takes full viewport */
+.reel {
+  position: relative;
+  height: 100dvh;
+  width: 100%;
+  scroll-snap-align: start;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.reel-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: #000;
+  cursor: pointer;
+}
+
+/* Top Bar: Clean & Minimal */
+.reels-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  z-index: 25;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.reels-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+.reels-brand-pill:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.reels-brand-flame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.reels-top-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  pointer-events: auto;
+}
+
+.reels-auth-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.reels-auth-pill:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.reels-role-badge {
+  font-size: 0.72rem;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.reels-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.reels-pill-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Double Tap Heart Pop */
+.double-tap-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 20;
+  color: var(--color-primary);
+  animation: doubleTapHeart 0.8s ease-out forwards;
+}
+
+/* Overlay gradient: Clean cinematic readability */
+.reel-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.reel-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.0) 25%,
+    rgba(0, 0, 0, 0.0) 50%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+/* Right-side vertical actions rail */
+.reel-actions {
+  position: absolute;
+  right: var(--space-4);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 84px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: auto;
+  z-index: 15;
+}
+
+.reel-action-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.reel-action {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  outline: none;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.reel-action:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.08);
+}
+
+.reel-action:active {
+  transform: scale(0.94);
+}
+
+/* Active Like: Solid Clean Blue */
+.reel-action.is-liked {
+  background: rgba(37, 99, 235, 0.3);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  animation: heartBurst 0.35s ease;
+}
+
+.reel-action.is-liked svg {
+  fill: var(--color-primary);
+  stroke: var(--color-primary);
+}
+
+/* Active Save: Solid Clean Blue */
+.reel-action.is-saved {
+  background: rgba(37, 99, 235, 0.3);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  animation: bookmarkPop 0.35s ease;
+}
+
+.reel-action.is-saved svg {
+  fill: var(--color-primary);
+  stroke: var(--color-primary);
+}
+
+.reel-action__count {
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Reel Content: bottom left details */
+.reel-content {
+  position: relative;
+  width: 100%;
+  padding: var(--space-4);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 80px);
+  padding-right: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  pointer-events: auto;
+  z-index: 12;
+}
+
+/* Store Badge Pill */
+.reel-store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  color: #FFFFFF;
+  text-decoration: none;
+  width: fit-content;
+  transition: all var(--transition-fast);
+}
+
+.reel-store-badge:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: var(--color-primary);
+}
+
+.reel-store-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.reel-store-name {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.reel-store-cta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.reel-description {
+  color: #F8FAFC;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 85ch;
+}
+
+.reel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.reel-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #93C5FD;
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* Floating Toast Notification */
+.reels-toast {
+  position: fixed;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid var(--color-border);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: toastSlideUp 0.25s ease-out;
+}
+
+/* Empty State / Login To View Reels State */
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-text);
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--color-bg);
+  z-index: 30;
+}
+
+.empty-state-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: grid;
+  place-items: center;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state h2, .empty-state h3 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.empty-state p {
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  max-width: 38ch;
+  line-height: 1.45;
+}
+
+.empty-state-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: var(--space-2);
+}
+
+.empty-state-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.empty-state-btn:hover {
+  background: var(--color-primary-hover);
+}
+
+.empty-state-btn.secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.empty-state-btn.secondary:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.empty-state-subtext {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Desktop tweaks */
+@media (min-width: 768px) {
+  .reel-content {
+    padding: var(--space-6);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 85px);
+    max-width: 600px;
+  }
+  .reel-actions {
+    right: calc(50% - 270px + var(--space-4));
+  }
+  .reel-video {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .reel-content {
+    left: calc(50% - 260px);
+  }
+}
