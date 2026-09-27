@@ -15,7 +15,7 @@ const Saved = () => {
     if (!isLoggedIn) return;
 
     setIsLoading(true);
-    axios.get("http://localhost:3000/api/food/save", { withCredentials: true })
+    axios.get("https://food-reel-backend-xii0.onrender.com/api/food/save", { withCredentials: true })
       .then(response => {
         if (response.data && response.data.savedFoods) {
           const savedFoods = response.data.savedFoods
@@ -44,7 +44,7 @@ const Saved = () => {
   const removeSaved = async (item) => {
     try {
       await axios.post(
-        "http://localhost:3000/api/food/save",
+        "https://food-reel-backend-xii0.onrender.com/api/food/save",
         { foodId: item._id },
         { withCredentials: true }
       );
@@ -57,7 +57,7 @@ const Saved = () => {
   const handleLike = async (item) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/food/like",
+        "https://food-reel-backend-xii0.onrender.com/api/food/like",
         { foodId: item._id },
         { withCredentials: true }
       );
