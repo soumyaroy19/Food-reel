@@ -72,9 +72,9 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       if (role === 'food-partner') {
-        await axios.post('http://localhost:3000/api/auth/food-partner/logout', {}, { withCredentials: true }).catch(() => {});
+        await axios.post('https://food-reel-backend-xii0.onrender.com/api/auth/food-partner/logout', {}, { withCredentials: true }).catch(() => {});
       } else {
-        await axios.post('http://localhost:3000/api/auth/user/logout', {}, { withCredentials: true }).catch(() => {});
+        await axios.post('https://food-reel-backend-xii0.onrender.com/api/auth/user/logout', {}, { withCredentials: true }).catch(() => {});
       }
     } catch (e) {
       console.error(e);
