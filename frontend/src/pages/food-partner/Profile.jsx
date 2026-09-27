@@ -12,7 +12,7 @@ const Profile = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(`http://localhost:3000/api/food-partner/${id}`, { withCredentials: true })
+    axios.get(`https://food-reel-backend-xii0.onrender.com/api/food-partner/${id}`, { withCredentials: true })
       .then(response => {
         if (response.data && response.data.foodPartner) {
           setProfile(response.data.foodPartner);
