@@ -22,7 +22,7 @@ const FoodPartnerLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/food-partner/login",
+        "https://food-reel-backend-xii0.onrender.com/api/auth/food-partner/login",
         { email, password },
         { withCredentials: true }
       );
