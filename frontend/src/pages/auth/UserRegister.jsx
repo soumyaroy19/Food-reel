@@ -30,7 +30,7 @@ const UserRegister = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/user/register",
+        "https://food-reel-backend-xii0.onrender.com/api/auth/user/register",
         {
           fullName: `${firstName} ${lastName}`.trim(),
           email,
