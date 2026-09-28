@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/auth-shared.css';
 import ThemeToggle from '../../components/ThemeToggle';
+import AppLogo from '../../components/AppLogo';
 
 const ChooseRegister = () => {
   return (
@@ -12,13 +13,8 @@ const ChooseRegister = () => {
 
       <div className="auth-card" role="region" aria-labelledby="choose-register-title">
         <header className="auth-header">
-          <div className="auth-brand-badge" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z" />
-              <path d="m15 9-6 6" />
-              <path d="M9 9h.01" />
-              <path d="M15 15h.01" />
-            </svg>
+          <div style={{ marginBottom: '4px' }}>
+            <AppLogo size="medium" />
           </div>
           <h1 id="choose-register-title" className="auth-title">Join Foodie Zone</h1>
           <p className="auth-subtitle">Pick how you want to experience the platform.</p>

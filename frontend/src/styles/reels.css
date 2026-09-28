@@ -69,20 +69,22 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  padding: 5px 14px 5px 6px;
   background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-full);
   color: #FFFFFF;
   font-family: var(--font-heading);
-  font-size: 0.92rem;
-  font-weight: 700;
   pointer-events: auto;
   text-decoration: none;
+  transition: all var(--transition-fast);
 }
 
 .reels-brand-pill:hover {
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .reels-brand-flame {

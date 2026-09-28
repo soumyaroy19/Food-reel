@@ -1,0 +1,165 @@
+/* ===================================================================
+   FOODIE ZONE LOADING POPUP / BACKEND API MODAL
+   Modern glassmorphic modal with animated orbit, dots, and wake hint
+   =================================================================== */
+
+@import './theme.css';
+
+.loading-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  animation: loadingFadeIn 0.2s ease-out forwards;
+}
+
+.loading-popup-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2), 0 0 24px rgba(37, 99, 235, 0.2);
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  animation: loadingCardPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Spinner orbit around cloche */
+.loading-spinner-wrapper {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+
+.loading-spinner-orbit {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 3px solid rgba(37, 99, 235, 0.15);
+  border-top-color: var(--color-primary);
+  border-right-color: var(--color-primary);
+  animation: loadingSpin 0.9s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+}
+
+.loading-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-popup-title {
+  font-family: var(--font-heading);
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Animated jumping dots */
+.loading-dots {
+  display: inline-flex;
+  margin-left: 2px;
+}
+
+.loading-dots span {
+  animation: dotBlink 1.4s infinite;
+  opacity: 0.2;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.loading-popup-message {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  max-width: 34ch;
+}
+
+/* Server wake-up notice for slow cold starts */
+.loading-popup-wake-hint {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--color-primary-subtle);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  animation: loadingFadeIn 0.3s ease-out forwards;
+}
+
+.wake-hint-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+@keyframes loadingSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dotBlink {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes loadingFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes loadingCardPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

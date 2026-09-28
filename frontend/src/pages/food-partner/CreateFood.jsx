@@ -4,6 +4,8 @@ import '../../styles/create-food.css';
 import { useNavigate, Link } from 'react-router-dom';
 import ThemeToggle from '../../components/ThemeToggle';
 import { useAuth } from '../../context/AuthContext';
+import AppLogo from '../../components/AppLogo';
+import LoadingPopup from '../../components/LoadingPopup';
 
 const FLAVOR_TAGS = [
   '🌶️ Extra Spicy',
@@ -160,6 +162,12 @@ const CreateFood = () => {
 
   return (
     <div className="create-food-page">
+      <LoadingPopup
+        isOpen={isSubmitting}
+        title="Publishing Food Reel"
+        message="Uploading your appetizing video to Foodie Zone backend..."
+      />
+
       <div className="create-food-card">
         {/* Navigation & Theme Switcher */}
         <div className="create-food-top-row">
@@ -170,6 +178,7 @@ const CreateFood = () => {
             </svg>
             Back to Reels
           </Link>
+          <AppLogo size="small" showSubtitle={false} />
           <ThemeToggle showLabel />
         </div>
 

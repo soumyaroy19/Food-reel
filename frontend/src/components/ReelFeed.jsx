@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import AppLogo from './AppLogo';
 import { useAuth } from '../context/AuthContext';
 
 const ReelFeed = ({
@@ -12,7 +13,6 @@ const ReelFeed = ({
 }) => {
   const { role, user, isLoggedIn, openRoleModal, logout } = useAuth();
   const videoRefs = useRef(new Map());
-  const [isMuted, setIsMuted] = useState(true);
   const [doubleTapAnimation, setDoubleTapAnimation] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
   const [likedMap, setLikedMap] = useState({});
@@ -58,14 +58,6 @@ const ReelFeed = ({
       return;
     }
     videoRefs.current.set(id, el);
-  };
-
-  const toggleMute = () => {
-    const newMuted = !isMuted;
-    setIsMuted(newMuted);
-    videoRefs.current.forEach((vid) => {
-      if (vid) vid.muted = newMuted;
-    });
   };
 
   const showToast = (msg) => {
@@ -154,16 +146,8 @@ const ReelFeed = ({
     <div className="reels-page">
       {/* Floating Top Bar */}
       <header className="reels-top-bar">
-        <Link to="/" className="reels-brand-pill" title="Foodie Zone Home">
-          <span className="reels-brand-flame">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z" />
-              <path d="m15 9-6 6" />
-              <path d="M9 9h.01" />
-              <path d="M15 15h.01" />
-            </svg>
-          </span>
-          <span>Foodie Zone</span>
+        <Link to="/" className="reels-brand-pill" title="Foodie Zone Home" style={{ textDecoration: 'none' }}>
+          <AppLogo size="small" lightText showSubtitle={false} />
         </Link>
 
         <div className="reels-top-controls">
@@ -204,31 +188,6 @@ const ReelFeed = ({
               <span>Sign In</span>
             </button>
           )}
-
-          {/* Mute/Unmute audio button */}
-          <button
-            type="button"
-            className="reels-pill-btn"
-            onClick={toggleMute}
-            aria-label={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-            title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-          >
-            {isMuted ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="1" y1="1" x2="23" y2="23" />
-                <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
-                <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
-                <line x1="12" y1="19" x2="12" y2="23" />
-                <line x1="8" y1="23" x2="16" y2="23" />
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" fillOpacity="0.2" />
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-              </svg>
-            )}
-          </button>
 
           {/* Theme Toggle in top bar */}
           <ThemeToggle />
@@ -278,7 +237,7 @@ const ReelFeed = ({
                 ref={setVideoRef(item._id)}
                 className="reel-video"
                 src={item.video}
-                muted={isMuted}
+                muted
                 playsInline
                 loop
                 preload="metadata"

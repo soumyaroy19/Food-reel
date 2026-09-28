@@ -6,6 +6,7 @@ import ReelFeed from '../../components/ReelFeed';
 import { useAuth } from '../../context/AuthContext';
 import ThemeToggle from '../../components/ThemeToggle';
 import AppLogo from '../../components/AppLogo';
+import LoadingPopup from '../../components/LoadingPopup';
 
 const Home = () => {
   const { isLoggedIn } = useAuth();
@@ -97,15 +98,7 @@ const Home = () => {
       <div className="reels-page">
         <header className="reels-top-bar" style={{ pointerEvents: 'auto' }}>
           <div className="reels-brand-pill">
-            <span className="reels-brand-flame">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z" />
-                <path d="m15 9-6 6" />
-                <path d="M9 9h.01" />
-                <path d="M15 15h.01" />
-              </svg>
-            </span>
-            <span>Foodie Zone</span>
+            <AppLogo size="small" lightText showSubtitle={false} />
           </div>
           <ThemeToggle />
         </header>
@@ -145,13 +138,20 @@ const Home = () => {
   }
 
   return (
-    <ReelFeed
-      items={videos}
-      onLike={likeVideo}
-      onSave={saveVideo}
-      emptyMessage="No food reels found"
-      emptySubtext="Kitchens are preparing new dishes. Check back shortly!"
-    />
+    <>
+      <LoadingPopup
+        isOpen={isLoading}
+        title="Fetching Food Reels"
+        message="Loading trending tastes and delicious kitchen videos from backend..."
+      />
+      <ReelFeed
+        items={videos}
+        onLike={likeVideo}
+        onSave={saveVideo}
+        emptyMessage="No food reels found"
+        emptySubtext="Kitchens are preparing new dishes. Check back shortly!"
+      />
+    </>
   );
 };
 

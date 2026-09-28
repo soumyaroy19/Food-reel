@@ -4,6 +4,8 @@ import '../../styles/auth-shared.css';
 import axios from 'axios';
 import ThemeToggle from '../../components/ThemeToggle';
 import { useAuth } from '../../context/AuthContext';
+import AppLogo from '../../components/AppLogo';
+import LoadingPopup from '../../components/LoadingPopup';
 
 const FoodPartnerRegister = () => {
   const navigate = useNavigate();
@@ -60,17 +62,20 @@ const FoodPartnerRegister = () => {
 
   return (
     <div className="auth-page-wrapper">
+      <LoadingPopup
+        isOpen={isLoading}
+        title="Registering Kitchen"
+        message="Setting up your Food Partner account with backend services..."
+      />
+
       <nav className="auth-top-nav" aria-label="Theme switch">
         <ThemeToggle showLabel />
       </nav>
 
       <div className="auth-card" role="region" aria-labelledby="partner-register-title">
         <header className="auth-header">
-          <div className="auth-brand-badge" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
-              <line x1="6" y1="17" x2="18" y2="17" />
-            </svg>
+          <div style={{ marginBottom: '4px' }}>
+            <AppLogo size="medium" />
           </div>
           <h1 id="partner-register-title" className="auth-title">Food Partner Sign Up</h1>
           <p className="auth-subtitle">Showcase your culinary creations to thousands of food lovers on Foodie Zone.</p>

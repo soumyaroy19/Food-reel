@@ -1,43 +1,64 @@
 import React from 'react';
 
-const AppLogo = ({ size = 'medium', className = '', showText = true }) => {
+const AppLogo = ({
+  size = 'medium',
+  className = '',
+  showText = true,
+  showSubtitle = true,
+  lightText = false,
+  style = {},
+}) => {
   // Dimensions based on size
   const iconSizes = {
-    small: { w: 28, h: 28 },
-    medium: { w: 42, h: 42 },
-    large: { w: 68, h: 68 },
-    splash: { w: 90, h: 90 },
+    xsmall: { w: 24, h: 24, radius: '8px', iconScale: 14, titleSize: '0.95rem' },
+    small: { w: 30, h: 30, radius: '10px', iconScale: 18, titleSize: '1.1rem' },
+    medium: { w: 44, h: 44, radius: '14px', iconScale: 25, titleSize: '1.35rem', subtitleSize: '0.74rem' },
+    large: { w: 64, h: 64, radius: '18px', iconScale: 36, titleSize: '1.65rem', subtitleSize: '0.82rem' },
+    splash: { w: 88, h: 88, radius: '24px', iconScale: 50, titleSize: '2.1rem', subtitleSize: '0.88rem' },
   };
 
-  const { w, h } = iconSizes[size] || iconSizes.medium;
+  const config = iconSizes[size] || iconSizes.medium;
+  const isCompact = size === 'small' || size === 'xsmall';
+  const displaySubtitle = showSubtitle && !isCompact && config.subtitleSize;
+  const textColor = lightText ? '#FFFFFF' : 'var(--color-text)';
 
   return (
-    <div className={`app-logo-wrap size-${size} ${className}`} style={{ display: 'inline-flex', alignItems: 'center', gap: size === 'splash' ? '14px' : '10px' }}>
+    <div
+      className={`app-logo-wrap size-${size} ${className}`}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: size === 'splash' ? '14px' : isCompact ? '8px' : '10px',
+        userSelect: 'none',
+        ...style,
+      }}
+    >
+      {/* Brand Icon Cloche */}
       <div
         className="app-logo-icon"
         style={{
-          width: `${w}px`,
-          height: `${h}px`,
-          borderRadius: size === 'splash' ? '24px' : size === 'large' ? '18px' : '12px',
+          width: `${config.w}px`,
+          height: `${config.h}px`,
+          borderRadius: config.radius,
           background: 'var(--color-primary)',
           color: '#FFFFFF',
           display: 'grid',
           placeItems: 'center',
           flexShrink: 0,
-          boxShadow: 'var(--shadow-sm)',
+          boxShadow: size === 'splash' || size === 'large' ? 'var(--shadow-md)' : 'var(--shadow-sm)',
         }}
       >
         <svg
-          width={Math.round(w * 0.58)}
-          height={Math.round(h * 0.58)}
+          width={config.iconScale}
+          height={config.iconScale}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2.2"
+          strokeWidth="2.3"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          {/* Modern Food Cloche with Cutlery / Waves */}
+          {/* Modern Food Cloche with Signature Culinary Steam */}
           <path d="M3 18h18" />
           <path d="M4 18a8 8 0 0 1 16 0" />
           <path d="M12 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
@@ -47,31 +68,32 @@ const AppLogo = ({ size = 'medium', className = '', showText = true }) => {
         </svg>
       </div>
 
+      {/* Brand Typography */}
       {showText && (
-        <div className="app-logo-text" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="app-logo-text" style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
           <span
             className="app-logo-title"
             style={{
               fontFamily: 'var(--font-heading)',
               fontWeight: 800,
-              fontSize: size === 'splash' ? '2.1rem' : size === 'large' ? '1.5rem' : size === 'small' ? '1.05rem' : '1.25rem',
-              color: 'var(--color-text)',
+              fontSize: config.titleSize,
+              color: textColor,
               letterSpacing: '-0.02em',
               lineHeight: 1.1,
             }}
           >
             Foodie<span style={{ color: 'var(--color-primary)' }}>Zone</span>
           </span>
-          {size !== 'small' && (
+          {displaySubtitle && (
             <span
               className="app-logo-subtitle"
               style={{
-                fontSize: size === 'splash' ? '0.85rem' : '0.72rem',
+                fontSize: config.subtitleSize,
                 fontWeight: 600,
-                color: 'var(--color-text-secondary)',
+                color: lightText ? 'rgba(255, 255, 255, 0.75)' : 'var(--color-text-secondary)',
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                marginTop: '2px',
+                marginTop: '3px',
               }}
             >
               Taste The Trend

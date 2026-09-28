@@ -3,6 +3,8 @@ import '../../styles/profile.css';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import ThemeToggle from '../../components/ThemeToggle';
+import AppLogo from '../../components/AppLogo';
+import LoadingPopup from '../../components/LoadingPopup';
 
 const Profile = () => {
   const { id } = useParams();
@@ -29,7 +31,13 @@ const Profile = () => {
 
   return (
     <main className="profile-page">
-      {/* Top bar with back navigation and theme switcher */}
+      <LoadingPopup
+        isOpen={isLoading}
+        title="Loading Kitchen Profile"
+        message="Retrieving partner dishes and reels from backend..."
+      />
+
+      {/* Top bar with back navigation, app logo, and theme switcher */}
       <div className="profile-top-bar">
         <Link to="/" className="profile-back-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -38,6 +46,7 @@ const Profile = () => {
           </svg>
           Back to Reels
         </Link>
+        <AppLogo size="small" showSubtitle={false} />
         <ThemeToggle showLabel />
       </div>
 
